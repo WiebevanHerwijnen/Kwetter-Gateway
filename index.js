@@ -1,17 +1,29 @@
 var express = require('express');
 var app = express();
+var jwt = require('express-jwt');
+var jwks = require('jwks-rsa');
 var router = require('./routers/router')
-var bodyParser = require('body-parser');
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }));
+var port = process.env.PORT || 8080;
 
-app.get('/', (req, res) => {
-    res.send("Simple API Gateway")
-})
+var jwtCheck = jwt({
+      secret: jwks.expressJwtSecret({
+          cache: true,
+          rateLimit: true,
+          jwksRequestsPerMinute: 5,
+          jwksUri: 'https://dev-laou6ran.eu.auth0.com/.well-known/jwks.json'
+    }),
+    audience: 'https://localhost:3000',
+    issuer: 'https://dev-laou6ran.eu.auth0.com/',
+    algorithms: ['RS256']
+});
 
-app.use(router)
+app.use(jwtCheck);
+app.use(router);
 
-console.log("Simple API Gateway run on localhost:3000")
+app.get('/authorized', function (req, res) {
+    res.send('Secured Resource');
+});
 
-app.listen(3000);
+console.log(`running on port:${port}`)
+app.listen(port);
