@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router()
 const apiAdapter = require('./apiAdapter')
+var jwtAuthz = require('express-jwt-authz');
 
 const BASE_URL = 'http://localhost:8088'
 const api = apiAdapter(BASE_URL)
