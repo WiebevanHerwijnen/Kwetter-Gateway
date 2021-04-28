@@ -2,34 +2,35 @@ var express = require('express');
 var router = express.Router()
 const apiAdapter = require('./apiAdapter')
 
-const BASE_URL = 'http://localhost:3000'
+const BASE_URL = 'http://localhost:3001'
 const api = apiAdapter(BASE_URL)
 
-router.get('/profiles', (req, res) => {
+router.get('/tweets/:profileId/:pageNumber', (req, res) => {
    api.get(req.path).then(resp => {
     res.send(resp.data)
   })
 })
 
-router.get('/profile/:id', (req, res) => {
+router.get('/tweets/:pageNumber', (req, res) => {
   api.get(req.path).then(resp => {
     res.send(resp.data)
   })
 })
 
-router.post('/profile', (req, res) => {
+router.post('/tweet', (req, res) => {
   api.post(req.path, req.body).then(resp => {
     res.send(resp.data)
   })
 })
 
-router.delete('/delete/:id', (req, res) =>{
+router.delete('/tweet/delete/:id', (req, res) =>{
   api.delete(req.path).then(resp => {
     res.send(resp.data)
   })
 })
 
-router.patch('/update', (req, res) =>{
+router.patch('/tweet/update', (req, res) =>{
+    console.log(req.body)
   api.patch(req.path, req.body).then(resp => {
     res.send(resp.data)
   })
