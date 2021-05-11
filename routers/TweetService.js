@@ -6,6 +6,7 @@ const BASE_URL = 'http://localhost:3001'
 const api = apiAdapter(BASE_URL)
 
 router.get('/tweets/:profileId/:pageNumber', (req, res) => {
+  console.log('hi')
    api.get(req.path).then(resp => {
     res.send(resp.data)
   })
