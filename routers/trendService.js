@@ -31,6 +31,12 @@ router.get('/trend/:trendname', (req, res) => {
   })
 })
 
+router.get('/trend_popular', (req, res) => {
+  api.get(req.path).then(resp => {
+    res.send(resp.data)
+  })
+})
+
 router.delete('/trend/:trendid', (req, res) => {
   api.delete(req.path).then(resp => {
     res.send(resp.data)
