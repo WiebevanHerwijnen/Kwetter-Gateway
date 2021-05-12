@@ -18,6 +18,12 @@ router.get('/tweets/:pageNumber', (req, res) => {
   })
 })
 
+router.get('/getbytrend/:trend', (req, res) => {
+  api.get(req.path).then(resp => {
+    res.send(resp.data)
+  })
+})
+
 router.post('/tweet', (req, res) => {
   api.post(req.path, req.body).then(resp => {
     res.send(resp.data)
