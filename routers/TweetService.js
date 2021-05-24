@@ -6,7 +6,6 @@ const BASE_URL = 'http://localhost:3001'
 const api = apiAdapter(BASE_URL)
 
 router.get('/tweets/:profileId/:pageNumber', (req, res) => {
-  console.log('hi')
    api.get(req.path).then(resp => {
     res.send(resp.data)
   })
@@ -41,6 +40,13 @@ router.patch('/tweet/update', (req, res) =>{
   api.patch(req.path, req.body).then(resp => {
     res.send(resp.data)
   })
+})
+
+router.patch('/like', (req, res) =>{
+  console.log(req.body)
+api.patch(req.path, req.body).then(resp => {
+  res.send(resp.data)
+})
 })
 
 module.exports = router
