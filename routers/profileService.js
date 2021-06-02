@@ -20,7 +20,6 @@ router.get('/profile/:id', (req, res) => {
 })
 
 router.get('/profile_auth/:id', (req, res) => {
-  console.log('hey')
   api.get(req.path).then(resp => {
     res.send(resp.data)
   }).catch(error =>{
