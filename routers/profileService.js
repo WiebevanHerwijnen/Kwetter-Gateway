@@ -27,6 +27,14 @@ router.get('/profile_auth/:id', (req, res) => {
   })
 })
 
+router.get('/profile_paginated/:name', (req, res) => {
+  api.get(req.path).then(resp => {
+    res.send(resp.data)
+  }).catch(error =>{
+    console.log(error);
+  })
+})
+
 router.post('/profile', (req, res) => {
   api.post(req.path, req.body).then(resp => {
     res.send(resp.data)
